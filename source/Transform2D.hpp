@@ -38,7 +38,7 @@ public:
     Transform2D() noexcept = default;
 
     // --- Factories ---------------------------------------------------------
-    [[nodiscard]] static Transform2D translation(float tx, float ty) noexcept;   
+    [[nodiscard]] static Transform2D translation(float tx, float ty) noexcept;
     [[nodiscard]] static Transform2D rotation(float angle_rad) noexcept;
     [[nodiscard]] static Transform2D scale(float sx, float sy) noexcept;
 
@@ -60,6 +60,15 @@ public:
      * @return [d.x, d.y, 0] * M (third row ignored).
      */
     [[nodiscard]] Vector2D transform_vector(const Vector2D& direction) const noexcept;
+
+    /// Determinant of the upper-left 2x2 block (area scale factor).
+    [[nodiscard]] float determinant() const noexcept;
+
+    /**
+     * @brief Inverse transform: (*this * inverse()) is the identity.
+     * @pre std::abs(determinant()) > EPSILON (no zero scale).
+     */
+    [[nodiscard]] Transform2D inverse() const;
 };
 
 #endif // GAME_TRANSFORM2D_HPP

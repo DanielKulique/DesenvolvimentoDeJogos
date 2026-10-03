@@ -55,21 +55,25 @@ struct Vector2D {
     /// Approximate equality within a tolerance.
     [[nodiscard]] bool equals(const Vector2D& rhs, float tolerance = EPSILON) const noexcept;
 
-
     // --- Operators ---------------------------------------------------------
+
+    /// Unary negation (opposite direction).
+    [[nodiscard]] constexpr Vector2D operator-() const noexcept {
+        return {-x, -y};
+    }
 
     [[nodiscard]] Vector2D operator+(const Vector2D& rhs) const noexcept;
     [[nodiscard]] Vector2D operator-(const Vector2D& rhs) const noexcept;
     [[nodiscard]] Vector2D operator*(float scalar) const noexcept;
 
-    // @pre std::abs(scalar) > EPSILON.
-    [[nodiscard]] Vector2D operator/(float scalar) const;   
+    /// @pre std::abs(scalar) > EPSILON.
+    [[nodiscard]] Vector2D operator/(float scalar) const;
 
     Vector2D& operator+=(const Vector2D& rhs) noexcept;
     Vector2D& operator-=(const Vector2D& rhs) noexcept;
     Vector2D& operator*=(float scalar) noexcept;
 
-    // @pre std::abs(scalar) > EPSILON.
+    /// @pre std::abs(scalar) > EPSILON.
     Vector2D& operator/=(float scalar);
 };
 
