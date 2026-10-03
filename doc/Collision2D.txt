@@ -1,0 +1,26 @@
+Collision2D.cpp
+===============
+
+Implementa caixas de colisão alinhadas aos eixos (AABB). As coordenadas estão
+em pixels, com x crescente para a direita e y crescente para baixo.
+
+AABB::intersects(other)
+-----------------------
+Retorna true quando as duas caixas se sobrepõem nos eixos x e y. Bordas que
+apenas se tocam também contam como colisão. Retorna false se houver separação
+em pelo menos um dos eixos.
+
+Cada AABB deve respeitar min.x <= max.x e min.y <= max.y.
+
+Collision2D::bounds(position)
+-----------------------------
+Constrói a AABB da entidade a partir do centro position:
+
+    min = position - halfExtents
+    max = position + halfExtents
+
+halfExtents guarda metade da largura e metade da altura. O valor padrão é
+(32, 32) pixels, formando uma caixa de 64 x 64 pixels (TILE_SIZE).
+
+Exemplo: com position = (10, 20) e halfExtents padrão, bounds retorna
+min = (-22, -12) e max = (42, 52).

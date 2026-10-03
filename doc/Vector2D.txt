@@ -1,0 +1,29 @@
+Vector2D.cpp
+============
+
+Representa um ponto ou uma direção em duas dimensões por dois componentes
+float, x e y. O construtor sem argumentos cria (0, 0). Os componentes devem
+ser valores finitos.
+
+Comprimento e normalização
+--------------------------
+length_squared() retorna x*x + y*y; length() retorna a raiz quadrada desse
+valor. normalized() cria um vetor de comprimento 1 na mesma direção, enquanto
+normalize() altera o próprio vetor. Para ambos, length() deve ser maior que
+EPSILON (1e-6); essa condição é verificada por assert em depuração.
+
+Exemplo: (3, 4) tem length() = 5 e normalized() = (0,6, 0,8).
+
+Produtos e comparação
+---------------------
+dot(rhs) calcula x*rhs.x + y*rhs.y. cross(rhs) calcula x*rhs.y - y*rhs.x,
+um escalar em duas dimensões. equals(rhs, tolerance) compara cada componente
+com tolerância absoluta; o padrão é EPSILON.
+
+Operadores
+----------
++ e - somam ou subtraem componentes. O menos unário inverte os sinais.
+Multiplicação e divisão por escalar atuam em cada componente; a multiplicação
+aceita tanto vetor * escalar quanto escalar * vetor. +=, -=, *= e /= alteram
+o próprio vetor. Na divisão, abs(escalar) deve ser maior que EPSILON;
+essa condição é verificada por assert em depuração.

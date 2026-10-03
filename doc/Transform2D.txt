@@ -1,0 +1,32 @@
+Transform2D.cpp
+===============
+
+Representa uma transformação afim 2D com matriz 3 x 3. O construtor sem
+argumentos cria a identidade. A matriz m é armazenada como m[linha][coluna]
+e usa vetores-linha: um ponto é [x, y, 1] e uma direção é [x, y, 0].
+A translação fica na terceira linha, m[2][0] e m[2][1]. A terceira coluna
+permanece [0, 0, 1]. Os elementos da matriz devem ser finitos.
+
+Criação
+-------
+translation(tx, ty) desloca um ponto por (tx, ty).
+rotation(angle_rad) gira pelo ângulo dado em radianos; um ângulo positivo de
+pi/2 transforma a direção (1, 0) em (0, 1).
+scale(sx, sy) multiplica x por sx e y por sy.
+
+Aplicação e composição
+---------------------
+transform_point(point) aplica a parte linear e a translação.
+transform_vector(direction) aplica apenas a parte linear.
+
+O produto A * B aplica A primeiro e B depois; A *= B faz o mesmo produto e
+atualiza A. Por exemplo, scale(2, 3) * translation(5, -7) transforma o ponto
+(1, 2) em (7, -1) e a direção (1, 2) em (2, 6).
+
+Determinante e inversa
+---------------------
+determinant() retorna o determinante da parte linear 2 x 2. inverse() cria
+a transformação inversa: aplicar uma transformação e depois sua inversa
+recupera o ponto original, dentro da precisão de float. Para chamar inverse(),
+abs(determinant()) deve ser maior que EPSILON (1e-6); essa condição é
+verificada por assert em depuração.
